@@ -8,7 +8,5 @@ java {
     targetCompatibility = JavaVersion.VERSION_1_7
 }
 dependencies {
-    api ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    api ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
-    api(project(mapOf("path" to ":entity")))
+    implementation ("androidx.room:room-common:2.5.2")
 }
