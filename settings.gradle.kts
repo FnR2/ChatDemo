@@ -15,4 +15,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "ChatDemo"
 include(":app")
- 
+include(":usecase")
+include(":data")
+include(":room")
