@@ -8,8 +8,9 @@ import androidx.room.PrimaryKey
 @Entity(
     foreignKeys = [ForeignKey(
         entity = Chat::class,
-        childColumns = ["messageId"],
-        parentColumns = ["ownerChatId"]
+        childColumns = ["owner_chat"],
+        parentColumns = ["chat_id"],
+        onDelete = ForeignKey.CASCADE
     )]
 )
 data class Message(
