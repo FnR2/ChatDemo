@@ -49,4 +49,24 @@ class ChatRepository(
             emit(Result.failure(it))
         }
     }
+
+    suspend fun startChat(name: String): Flow<Result<Long>> {
+        return flow<Long> {
+            chatDao.createNewChat(name)
+        }.map {
+            Result.success(it)
+        }.catch {
+            emit(Result.failure(it))
+        }
+    }
+
+    suspend fun sendMessage(chatId: Int, message: String): Flow<Result<Long>> {
+        return flow<Long> {
+            chatDao.insertMessage(chatId, message)
+        }.map {
+            Result.success(it)
+        }.catch {
+            emit(Result.failure(it))
+        }
+    }
 }

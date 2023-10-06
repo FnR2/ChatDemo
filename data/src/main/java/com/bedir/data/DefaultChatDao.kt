@@ -10,4 +10,5 @@ interface DefaultChatDao {
     suspend fun deleteChat(chatId:Int):Flow<Long>
     suspend fun getAllChats():Flow<List<ChatWithMessages>>
     suspend fun getChatMessages(chatId:Int):Flow<List<Message>>
+    suspend fun insertMessage(chatId: Int,text:String):Flow<Long>
 }
