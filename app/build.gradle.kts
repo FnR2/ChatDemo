@@ -1,3 +1,5 @@
+import com.android.build.api.dsl.Packaging
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -6,12 +8,12 @@ plugins {
 
 android {
     namespace = "com.bedir.chatdemo"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.bedir.chatdemo"
         minSdk = 27
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -31,6 +33,16 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    packagingOptions {
+        exclude("META-INF/proguard/androidx-annotations.pro")
+        exclude("META-INF/gradle/incremental.annotation.processors")
+        exclude("META-INF/LICENSE")
+        exclude ("META-INF/*.properties")
+        exclude ("META-INF/AL2.0")
+        exclude ("META-INF/LGPL2.1")
+    }
+
+
 }
 
 dependencies {
@@ -58,5 +70,8 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-process:$lifecycle")
     implementation ("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation ("com.google.code.gson:gson:2.10.1")
+    implementation ("androidx.core:core-splashscreen:1.0.1")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
 }

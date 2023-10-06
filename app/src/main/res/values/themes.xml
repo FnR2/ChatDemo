@@ -6,4 +6,8 @@
     </style>
 
     <style name="Theme.ChatDemo" parent="Base.Theme.ChatDemo" />
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="postSplashScreenTheme">@style/Theme.ChatDemo</item>
+    </style>
 </resources>

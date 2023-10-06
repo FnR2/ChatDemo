@@ -14,8 +14,8 @@ class ChatDaoProvider @Inject constructor(
         return chatDao.createChat(name)
     }
 
-    override suspend fun changeMute(chatId: Int,isMuted:Boolean): Flow<Long> {
-        return chatDao.changeMute(chatId,isMuted)
+    override suspend fun changeMute(chatId: Int, isMuted: Boolean): Flow<Long> {
+        return chatDao.changeMute(chatId, isMuted)
     }
 
     override suspend fun deleteChat(chatId: Int): Flow<Long> {
@@ -28,5 +28,9 @@ class ChatDaoProvider @Inject constructor(
 
     override suspend fun getChatMessages(chatId: Int): Flow<List<Message>> {
         return chatDao.getChatMessages(chatId)
+    }
+
+    override suspend fun insertMessage(chatId: Int, text: String): Flow<Long> {
+        return chatDao.insertMessage(text, chatId)
     }
 }

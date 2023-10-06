@@ -33,5 +33,8 @@ abstract class ChatDao {
     abstract suspend fun getChatMessages(id: Int
     ): Flow<List<Message>>
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract suspend fun insertMessage(text:String,chatId:Int): Flow<Long>
+
 
 }
