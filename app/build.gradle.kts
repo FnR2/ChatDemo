@@ -4,6 +4,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id ("com.google.dagger.hilt.android")
+    id ("kotlin-kapt")
 }
 
 android {
@@ -41,6 +42,11 @@ android {
         exclude ("META-INF/AL2.0")
         exclude ("META-INF/LGPL2.1")
     }
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+
 
 
 }
