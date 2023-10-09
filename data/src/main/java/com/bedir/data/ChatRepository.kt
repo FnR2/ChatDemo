@@ -53,14 +53,8 @@ class ChatRepository(
         }
     }
 
-    suspend fun startChat(chat: Chat): Flow<Result<Long>> {
-        return flow<Long> {
-            emit(chatDao.createNewChat(chat))
-        }.map {
-            Result.success(it)
-        }.catch {
-            emit(Result.failure(it))
-        }.flowOn(Dispatchers.IO)
+    suspend fun startChat(chat: Chat): Long {
+        return chatDao.createNewChat(chat)
     }
 
     suspend fun sendMessage(message: Message): Flow<Result<Long>> {
@@ -73,13 +67,7 @@ class ChatRepository(
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun checkItemExist(name: String): Flow<Result<Boolean>> {
-        return flow<Boolean> {
-            emit(chatDao.checkItemExist(name))
-        }.map {
-            Result.success(it)
-        }.catch {
-            emit(Result.failure(it))
-        }.flowOn(Dispatchers.IO)
+    suspend fun checkItemExist(name: String): Boolean {
+        return chatDao.checkItemExist(name)
     }
 }

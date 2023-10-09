@@ -17,15 +17,13 @@ class NewChatViewModel @Inject constructor(
         viewModelScope.launch {
             createChatUseCase.execute(
                 Chat(
-                    chatId = 0,
                     name = chatName,
                     isMuted = false,
-                    lastMessage = ""
                 )
             ).collect { result ->
                 when (result) {
                     is StartChatResult.ChatExist -> {
-                        setNewState(NewChatViewState.ChatExist)
+                        sendEvent(ChatExist)
                     }
 
                     is StartChatResult.Error -> {
@@ -33,7 +31,7 @@ class NewChatViewModel @Inject constructor(
                     }
 
                     is StartChatResult.Success -> {
-                        setNewState(NewChatViewState.Success)
+                        sendEvent(ChatCreateSuccess)
                     }
                 }
 
@@ -46,7 +44,5 @@ class NewChatViewModel @Inject constructor(
 
 sealed class NewChatViewState : State {
     object IdleState : NewChatViewState()
-    object Success : NewChatViewState()
-    object ChatExist : NewChatViewState()
 
 }
