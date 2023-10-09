@@ -5,9 +5,12 @@ import com.bedir.usecase.AllChatsResult
 import com.bedir.usecase.GetAllChatUseCase
 import com.bedir.usecase.SendMessageUseCase
 import com.bedir.usecase.StartChatUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MessagingViewModel(
+@HiltViewModel
+class MessagingViewModel @Inject constructor(
     private val sendMessageUseCase: SendMessageUseCase
 ) : DemoViewModel<MessagingState>(MessagingState.Success) {
 
@@ -21,5 +24,5 @@ class MessagingViewModel(
 }
 
 sealed class MessagingState() : State {
-    data object Success : MessagingState()
+    object Success : MessagingState()
 }

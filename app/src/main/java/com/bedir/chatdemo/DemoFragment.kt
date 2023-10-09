@@ -9,10 +9,11 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewbinding.ViewBinding
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-abstract class DemoFragment<VB : ViewBinding>(): Fragment() {
+abstract class DemoFragment<VB : ViewBinding>() : Fragment(), EventListener {
 
     private var mBinding: VB? = null
     val viewBinding get() = mBinding!!
@@ -50,5 +51,18 @@ abstract class DemoFragment<VB : ViewBinding>(): Fragment() {
     }
 
     abstract fun render(state: State)
+
+    fun subscribeEvents(events: Flow<Event>) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                events.collect {
+                    handleEvent(it)
+                }
+            }
+
+        }
+    }
+
+    abstract fun handleEvent(event: Event)
 
 }

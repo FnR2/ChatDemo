@@ -3,9 +3,12 @@ package com.bedir.chatdemo
 import androidx.lifecycle.viewModelScope
 import com.bedir.usecase.AllChatsResult
 import com.bedir.usecase.GetAllChatUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ChatListViewModel(
+
+class ChatListViewModel (
     private val chatListUseCase: GetAllChatUseCase
 ) : DemoViewModel<ChatListState>(ChatListState.IdleState) {
 
@@ -33,5 +36,5 @@ class ChatListViewModel(
 }
 
 sealed class ChatListState() : State {
-    data object IdleState : ChatListState()
+     object IdleState : ChatListState()
 }

@@ -5,8 +5,9 @@ import com.bedir.usecase.AllChatsResult
 import com.bedir.usecase.GetAllChatUseCase
 import com.bedir.usecase.StartChatUseCase
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CreateChatViewModel(
+class CreateChatViewModel @Inject constructor (
     private val startChatUseCase: StartChatUseCase
 ) : DemoViewModel<CreateChatState>(CreateChatState.Success) {
 
@@ -20,5 +21,5 @@ class CreateChatViewModel(
 }
 
 sealed class CreateChatState() : State {
-    data object Success : CreateChatState()
+     object Success : CreateChatState()
 }

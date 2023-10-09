@@ -1,10 +1,11 @@
 import com.android.build.api.dsl.Packaging
 
 plugins {
+    kotlin("kapt")
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id ("com.google.dagger.hilt.android")
-    id ("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
+
 }
 
 android {
@@ -17,7 +18,7 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
+        vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -64,8 +65,6 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    implementation ("com.google.dagger:hilt-android:2.44.2")
-    implementation ("com.google.dagger:hilt-android-compiler:2.37")
     implementation ("androidx.navigation:navigation-fragment-ktx:$nav")
     implementation ("androidx.navigation:navigation-ui-ktx:$nav")
     implementation ("androidx.navigation:navigation-fragment-ktx:$nav")
@@ -79,5 +78,10 @@ dependencies {
     implementation ("androidx.core:core-splashscreen:1.0.1")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
-
+    implementation("com.google.dagger:hilt-android:2.42")
+    kapt("com.google.dagger:hilt-android-compiler:2.42")
+    kapt ("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.5.0")
+}
+kapt {
+    correctErrorTypes = true
 }

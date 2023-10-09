@@ -26,6 +26,6 @@ class GetAllChatUseCase(
 
 sealed class AllChatsResult : UseCaseResult {
     data class Success(val chatList: List<ChatWithMessages>) : AllChatsResult()
-    data object Empty : AllChatsResult()
+    object Empty : AllChatsResult()
     data class Error(val error: Throwable) : AllChatsResult()
 }
