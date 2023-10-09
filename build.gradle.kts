@@ -5,5 +5,6 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version "1.7.0" apply false
     id("com.android.library") version "8.1.1" apply false
     id ("com.google.dagger.hilt.android") version "2.42" apply false
+    id ("androidx.navigation.safeargs") version "2.5.0" apply false
     kotlin("kapt") version "1.7.0"
 }

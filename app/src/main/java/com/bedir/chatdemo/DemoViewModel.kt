@@ -15,7 +15,7 @@ open class DemoViewModel<S:State>(
         stateHolder.value = state
     }
 
-    fun <T> getState() = stateHolder.value as S
+    fun  getState() = stateHolder.value as S
 
     private val eventChannel = Channel<Event>(Channel.BUFFERED)
     private val eventsFlow = eventChannel.receiveAsFlow()

@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-abstract class DemoFragment<VB : ViewBinding>() : Fragment(), EventListener {
+abstract class DemoFragment<VB : ViewBinding>() : Fragment(), EventPublisher {
 
     private var mBinding: VB? = null
     val viewBinding get() = mBinding!!
@@ -64,5 +64,8 @@ abstract class DemoFragment<VB : ViewBinding>() : Fragment(), EventListener {
     }
 
     abstract fun handleEvent(event: Event)
+    override fun sendEvent(event: Event) {
+
+    }
 
 }

@@ -6,27 +6,28 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.bedir.chatdemo.databinding.ChatListItemBinding
+import com.bedir.chatdemo.databinding.MessageItemBinding
 
-class ChatListAdapter(
+class MessagingAdapter(
     private val eventPublisher: EventPublisher
 ) :
-    ListAdapter<ChatItemModel, ChatListViewHolder>(
+    ListAdapter<MessageItemModel, MessagingViewHolder>(
         diffCallback
     ) {
 
     companion object {
 
-        private val diffCallback = object : DiffUtil.ItemCallback<ChatItemModel>() {
+        private val diffCallback = object : DiffUtil.ItemCallback<MessageItemModel>() {
             override fun areItemsTheSame(
-                oldItem: ChatItemModel,
-                newItem: ChatItemModel
+                oldItem: MessageItemModel,
+                newItem: MessageItemModel
             ): Boolean =
                 oldItem.id == newItem.id
 
 
             override fun areContentsTheSame(
-                oldItem: ChatItemModel,
-                newItem: ChatItemModel
+                oldItem: MessageItemModel,
+                newItem: MessageItemModel
             ): Boolean {
                 return oldItem == newItem
             }
@@ -34,18 +35,18 @@ class ChatListAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatListViewHolder {
-        val binding: ChatListItemBinding = DataBindingUtil.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessagingViewHolder {
+        val binding: MessageItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.chat_list_item,
+            R.layout.message_item,
             parent,
             false
         )
-        return ChatListViewHolder(binding, eventPublisher)
+        return MessagingViewHolder(binding, eventPublisher)
     }
 
-    override fun onBindViewHolder(holder: ChatListViewHolder, position: Int) {
-        val item: ChatItemModel = getItem(position)!!
+    override fun onBindViewHolder(holder: MessagingViewHolder, position: Int) {
+        val item: MessageItemModel = getItem(position)!!
         holder.bind(item)
     }
 

@@ -27,8 +27,8 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideChatRepository(chatdao:DefaultChatDao):ChatRepository {
-        return ChatRepository(chatdao)
+    fun provideChatRepository(chatDao:DefaultChatDao):ChatRepository {
+        return ChatRepository(chatDao)
     }
 
 

@@ -70,7 +70,20 @@ class ChatListFragment : DemoFragment<FragmentChatListBinding>() {
         viewModel.getChatList()
     }
 
-    override fun onEvent(event: Event) {
+    override fun sendEvent(event: Event) {
+        when (event) {
+            is NavigateChatEvent -> {
+                val action = MessagingFragmentDirections.navToMessaging(
+                    ChatScreenArg(
+                        event.chatId,
+                        event.chatName
+                    )
+                )
 
+                findNavController().navigate(action)
+
+            }
+        }
     }
+
 }

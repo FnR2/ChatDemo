@@ -13,7 +13,7 @@ open class DemoFragmentModule {
 
     @FragmentScoped
     @Provides
-    fun provideEventListener(fragment: Fragment): EventListener {
+    fun provideEventListener(fragment: Fragment): EventPublisher {
         return fragment as DemoFragment<*>
     }
 }

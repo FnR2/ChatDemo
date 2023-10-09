@@ -15,4 +15,18 @@
         android:name="com.bedir.chatdemo.NewChatFragment"
         android:label="@string/title_new_chat"
         tools:layout="@layout/fragment_new_chat" />
+
+    <fragment
+        android:id="@+id/navigation_messaging"
+        android:name="com.bedir.chatdemo.MessagingFragment"
+        android:label="@string/title_new_chat"
+        tools:layout="@layout/fragment_messaging">
+        <argument
+            android:name="arg"
+            app:argType="com.bedir.chatdemo.ChatScreenArg" />
+    </fragment>
+
+    <action
+        android:id="@+id/nav_to_messaging"
+        app:destination="@+id/navigation_messaging" />
 </navigation>

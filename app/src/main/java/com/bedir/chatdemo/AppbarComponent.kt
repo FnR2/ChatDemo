@@ -17,7 +17,7 @@ class AppbarComponent @JvmOverloads constructor(
     private var appBarBinding: CustomAppBarBinding =
         CustomAppBarBinding.inflate(LayoutInflater.from(context), this, true)
 
-    private var eventListener: EventListener? = null
+    private var eventPublisher: EventPublisher? = null
     fun setTitle(title: String) {
         appBarBinding.tvTitle.text = title
     }

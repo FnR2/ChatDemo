@@ -64,12 +64,12 @@ class ChatRepository(
 
     suspend fun sendMessage(message: Message): Flow<Result<Long>> {
         return flow<Long> {
-            chatDao.insertMessage(message)
+            emit(chatDao.insertMessage(message))
         }.map {
             Result.success(it)
         }.catch {
             emit(Result.failure(it))
-        }
+        }.flowOn(Dispatchers.IO)
     }
 
     suspend fun checkItemExist(name: String): Flow<Result<Boolean>> {

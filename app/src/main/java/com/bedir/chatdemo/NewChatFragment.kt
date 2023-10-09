@@ -52,10 +52,6 @@ class NewChatFragment : DemoFragment<FragmentNewChatBinding>() {
         }
     }
 
-    override fun onEvent(event: Event) {
-
-    }
-
     private fun showWarning() {
         Snackbar.make(viewBinding.clRoot, getString(R.string.exist_warning), Snackbar.LENGTH_LONG)
             .show()

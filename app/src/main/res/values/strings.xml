@@ -6,4 +6,6 @@
     <string name="create_button">Create New Chat</string>
     <string name="new_chat_hint">Enter Chat Name</string>
     <string name="exist_warning">This name already exist</string>
+    <string name="send">Send Message</string>
+    <string name="message_hint">Say Something</string>
 </resources>
