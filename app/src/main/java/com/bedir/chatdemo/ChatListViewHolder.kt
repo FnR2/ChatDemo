@@ -10,10 +10,17 @@ class ChatListViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(viewModel: ChatItemModel) {
-        binding.setVariable(BR.viewModel, viewModel)
-        binding.executePendingBindings()
-        binding.root.setOnClickListener {
-            eventPublisher.sendEvent(NavigateChatEvent(viewModel.id,viewModel.name))
+        with(binding) {
+            setVariable(BR.viewModel, viewModel)
+            executePendingBindings()
+            root.setOnClickListener {
+                eventPublisher.sendEvent(NavigateChatEvent(viewModel.id, viewModel.name))
+            }
+            root.setOnLongClickListener {
+                eventPublisher.sendEvent(ChatDeleteEvent)
+                true
+            }
         }
+
     }
 }

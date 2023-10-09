@@ -65,7 +65,7 @@ abstract class DemoFragment<VB : ViewBinding>() : Fragment(), EventPublisher {
 
     abstract fun handleEvent(event: Event)
     override fun sendEvent(event: Event) {
-
+        handleEvent(event)
     }
 
 }

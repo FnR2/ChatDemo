@@ -54,23 +54,6 @@ class ChatListFragment : DemoFragment<FragmentChatListBinding>() {
     }
 
     override fun handleEvent(event: Event) {
-
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        with(viewBinding) {
-            appbar.setTitle(getString(R.string.app_name))
-            rvChats.adapter = chatAdapter
-            fabNew.setOnClickListener(clickListener)
-            btnNewChat.setOnClickListener(clickListener)
-            fabNew.bringToFront()
-        }
-        subscribeFlow(viewModel.getStateHolder())
-        viewModel.getChatList()
-    }
-
-    override fun sendEvent(event: Event) {
         when (event) {
             is NavigateChatEvent -> {
                 val action = MessagingFragmentDirections.navToMessaging(
@@ -83,7 +66,25 @@ class ChatListFragment : DemoFragment<FragmentChatListBinding>() {
                 findNavController().navigate(action)
 
             }
+
+            is ChatDeleteEvent -> {
+                viewBinding.appbar.switchIcons()
+            }
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        with(viewBinding) {
+            appbar.setTitle(getString(R.string.app_name))
+            rvChats.adapter = chatAdapter
+            fabNew.setOnClickListener(clickListener)
+            btnNewChat.setOnClickListener(clickListener)
+            fabNew.bringToFront()
+        }
+        subscribeFlow(viewModel.getStateHolder())
+        subscribeEvents(viewModel.getEvents())
+        viewModel.getChatList()
     }
 
 }
