@@ -1,6 +1,5 @@
 package com.bedir.entity
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
@@ -17,6 +16,6 @@ data class Message(
     @PrimaryKey(autoGenerate = true)
     val messageId: Long,
     val text: String,
-    val createdAt: Float,
+    var createdAt: Long = 0,
     val ownerChatId: Int
 )

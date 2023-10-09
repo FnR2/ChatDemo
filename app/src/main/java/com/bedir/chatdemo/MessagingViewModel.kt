@@ -1,22 +1,12 @@
 package com.bedir.chatdemo
 
-import android.database.sqlite.SQLiteConstraintException
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.bedir.entity.Chat
 import com.bedir.entity.Message
-import com.bedir.usecase.AllChatsResult
-import com.bedir.usecase.GetAllChatUseCase
 import com.bedir.usecase.GetChatMessageResult
 import com.bedir.usecase.GetChatMessagesUseCase
 import com.bedir.usecase.SendMessageUseCase
-import com.bedir.usecase.StartChatResult
-import com.bedir.usecase.StartChatUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -68,7 +58,6 @@ class MessagingViewModel @Inject constructor(
                     Message(
                         messageId = 0,
                         text = message,
-                        createdAt = 0f,
                         ownerChatId = getState().id.toInt()
                     )
                 ).collect {

@@ -1,6 +1,5 @@
 package com.bedir.entity
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
@@ -12,7 +11,7 @@ data class Chat(
     val chatId: Int,
     var name: String,
     val isMuted: Boolean,
-    val createdAt:Float,
+    var createdAt: Long = 0,
     val lastMessage:String
 
 

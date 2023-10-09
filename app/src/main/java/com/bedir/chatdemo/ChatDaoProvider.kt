@@ -12,7 +12,7 @@ class ChatDaoProvider @Inject constructor(
     private val chatDao: ChatDao
 ) : DefaultChatDao {
     override suspend fun createNewChat(chat: Chat): Long {
-        return chatDao.createChat(chat)
+        return chatDao.insertChat(chat)
     }
 
     override suspend fun changeMute(chat: Chat): Int {
@@ -32,7 +32,7 @@ class ChatDaoProvider @Inject constructor(
     }
 
     override suspend fun insertMessage(message: Message): Long {
-        return chatDao.insertMessage(message)
+        return chatDao.createMessage(message)
     }
 
     override suspend fun checkItemExist(name: String): Boolean {

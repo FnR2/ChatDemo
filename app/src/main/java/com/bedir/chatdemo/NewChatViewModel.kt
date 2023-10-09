@@ -1,16 +1,10 @@
 package com.bedir.chatdemo
 
-import android.database.sqlite.SQLiteConstraintException
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.bedir.entity.Chat
-import com.bedir.usecase.AllChatsResult
-import com.bedir.usecase.GetAllChatUseCase
 import com.bedir.usecase.StartChatResult
 import com.bedir.usecase.StartChatUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,7 +20,6 @@ class NewChatViewModel @Inject constructor(
                     chatId = 0,
                     name = chatName,
                     isMuted = false,
-                    createdAt = 0f,
                     lastMessage = ""
                 )
             ).collect { result ->

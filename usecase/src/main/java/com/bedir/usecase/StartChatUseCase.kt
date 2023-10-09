@@ -16,11 +16,11 @@ class StartChatUseCase(
 ) : UseCase {
 
     suspend fun execute(chat: Chat): Flow<StartChatResult> {
-      return repository.checkItemExist(chat.name).map {
+      return repository.startChat (chat).map {
             it.fold(onSuccess = {
-                StartChatResult.ChatExist
+                StartChatResult.Success
             }, onFailure = {
-                StartChatResult.ChatExist
+                StartChatResult.Success
             })
         }
         /*checkResult.map { res ->

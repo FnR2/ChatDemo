@@ -1,10 +1,18 @@
 package com.bedir.chatdemo
 
-import com.bedir.entity.Chat
 import com.bedir.entity.ChatWithMessages
 import com.bedir.entity.Message
+import java.time.Instant
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
+import java.util.*
 
-class ItemMapper {
+
+class ItemMapper(
+    private val formatter: DateTimeFormatter
+) {
+
     fun mapChatList(list: List<ChatWithMessages>): List<ChatItemModel> {
         return list.map {
             ChatItemModel(
@@ -21,9 +29,15 @@ class ItemMapper {
             MessageItemModel(
                 id = message.messageId.toString(),
                 text = message.text,
-                date = message.createdAt.toString(),
+                date = convertTimeStamp(message.createdAt),
                 isLast = index == list.size - 1
             )
         }
+    }
+
+    private fun convertTimeStamp(timeStamp: Long): String {
+        return formatter.format(
+            Instant.ofEpochMilli(timeStamp)
+        )
     }
 }
