@@ -5,4 +5,6 @@ data class ChatItemModel(
     val name: String,
     val lastMessage: String,
     val isMuted: Boolean,
+    val isLast:Boolean,
+    val lastMessageDate:String
 )

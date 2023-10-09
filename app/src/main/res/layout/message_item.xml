@@ -24,7 +24,7 @@
             android:padding="4dp"
             android:text="@{viewModel.text}"
             android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
-            android:textColor="@color/grey"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Hello how are you" />

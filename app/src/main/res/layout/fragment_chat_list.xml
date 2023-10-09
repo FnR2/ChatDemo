@@ -63,8 +63,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
         app:srcCompat ="@drawable/baseline_create_24"
-        android:src="@drawable/baseline_notifications_off_24"
+        android:src="@drawable/baseline_create_24"
         android:visibility="gone"
+        android:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

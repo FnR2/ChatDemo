@@ -46,6 +46,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:padding="4dp"
+            android:text="@{viewModel.lastMessageDate}"
             android:textAppearance="@style/TextAppearance.Compat.Notification.Info"
             android:textColor="@color/grey"
             android:textSize="14sp"
@@ -55,15 +57,28 @@
             tools:text="12.10" />
 
         <ImageView
-            android:layout_marginTop="4dp"
             android:id="@+id/iv_mute"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
             android:src="@drawable/baseline_notifications_off_24"
             android:visibility="@{viewModel.muted?View.VISIBLE:View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_date" />
+
+        <View
+            android:id="@+id/vw_divider"
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/grey"
+            android:visibility="@{viewModel.last?View.GONE:View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_last_message" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -6,6 +6,8 @@ import com.bedir.entity.ChatWithMessages
 import com.bedir.entity.Message
 import com.bedir.room.ChatDao
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.transform
 import javax.inject.Inject
 
 class ChatDaoProvider @Inject constructor(
