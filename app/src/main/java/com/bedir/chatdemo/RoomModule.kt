@@ -8,6 +8,7 @@ import com.bedir.room.ConversationDB
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -17,7 +18,7 @@ class RoomModule {
 
     @Singleton
     @Provides
-    fun provideConversationDB(context: Context): ConversationDB {
+    fun provideConversationDB(@ApplicationContext context: Context): ConversationDB {
         return Room.databaseBuilder(context, ConversationDB::class.java, DB_NAME)
             .enableMultiInstanceInvalidation()
             .build()

@@ -2,7 +2,9 @@ package com.bedir.usecase
 
 import com.bedir.data.ChatRepository
 import com.bedir.entity.ChatWithMessages
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 
 class GetAllChatUseCase(

@@ -4,37 +4,37 @@ import androidx.room.*
 import com.bedir.entity.Chat
 import com.bedir.entity.ChatWithMessages
 import com.bedir.entity.Message
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 abstract class ChatDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract suspend fun createChat(name:String): Flow<Long>
+    abstract fun createChat(item: Chat): Long
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    abstract suspend fun changeMute(id: Int,isMuted:Boolean):Flow<Long>
+    abstract fun changeMute(chat: Chat): Int
 
     @Transaction
-    @Query("DELETE FROM Chat WHERE chat_id = :id")
-    abstract suspend fun deleteChat(id: Int): Flow<Long>
+    @Query("DELETE FROM Chat WHERE chatId = :id")
+    abstract fun deleteChat(id: Int): Int
 
     @Transaction
     @Query(
         "SELECT  * FROM Chat"
     )
-    abstract suspend fun getAllChats(
-    ): Flow<List<ChatWithMessages>>
+    abstract fun getAllChats(
+    ): List<ChatWithMessages>
 
     @Transaction
     @Query(
-        "SELECT  * FROM Chat WHERE chat_id = :id"
+        "SELECT  * FROM MESSAGE WHERE ownerChatId = :id"
     )
-    abstract suspend fun getChatMessages(id: Int
-    ): Flow<List<Message>>
+    abstract fun getChatMessages(
+        id: Int
+    ): List<Message>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract suspend fun insertMessage(text:String,chatId:Int): Flow<Long>
+    abstract fun insertMessage(message: Message): Long
 
 
 }

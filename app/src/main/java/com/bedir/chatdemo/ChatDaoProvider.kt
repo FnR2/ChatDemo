@@ -1,36 +1,36 @@
 package com.bedir.chatdemo
 
 import com.bedir.data.DefaultChatDao
+import com.bedir.entity.Chat
 import com.bedir.entity.ChatWithMessages
 import com.bedir.entity.Message
 import com.bedir.room.ChatDao
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class ChatDaoProvider @Inject constructor(
     private val chatDao: ChatDao
 ) : DefaultChatDao {
-    override suspend fun createNewChat(name: String): Flow<Long> {
-        return chatDao.createChat(name)
+    override suspend fun createNewChat(chat: Chat): Long {
+        return chatDao.createChat(chat)
     }
 
-    override suspend fun changeMute(chatId: Int, isMuted: Boolean): Flow<Long> {
-        return chatDao.changeMute(chatId, isMuted)
+    override suspend fun changeMute(chat: Chat): Int {
+        return chatDao.changeMute(chat)
     }
 
-    override suspend fun deleteChat(chatId: Int): Flow<Long> {
+    override suspend fun deleteChat(chatId: Int): Int {
         return chatDao.deleteChat(chatId)
     }
 
-    override suspend fun getAllChats(): Flow<List<ChatWithMessages>> {
+    override suspend fun getAllChats(): List<ChatWithMessages> {
         return chatDao.getAllChats()
     }
 
-    override suspend fun getChatMessages(chatId: Int): Flow<List<Message>> {
+    override suspend fun getChatMessages(chatId: Int): List<Message> {
         return chatDao.getChatMessages(chatId)
     }
 
-    override suspend fun insertMessage(chatId: Int, text: String): Flow<Long> {
-        return chatDao.insertMessage(text, chatId)
+    override suspend fun insertMessage(message: Message): Long {
+        return chatDao.insertMessage(message)
     }
 }

@@ -1,10 +1,13 @@
 package com.bedir.data
 
+import com.bedir.entity.Chat
 import com.bedir.entity.ChatWithMessages
 import com.bedir.entity.Message
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 
 class ChatRepository(
@@ -12,12 +15,12 @@ class ChatRepository(
 ) {
     suspend fun getAllChats(): Flow<Result<List<ChatWithMessages>>> {
         return flow<List<ChatWithMessages>> {
-            chatDao.getAllChats()
+            emit(chatDao.getAllChats())
         }.map {
             Result.success(it)
         }.catch {
             emit(Result.failure(it))
-        }
+        }.flowOn(Dispatchers.IO)
     }
 
     suspend fun getChatMessages(chatId: Int): Flow<Result<List<Message>>> {
@@ -30,9 +33,9 @@ class ChatRepository(
         }
     }
 
-    suspend fun changeMuteSettings(isMuted: Boolean, chatId: Int): Flow<Result<Long>> {
+    suspend fun changeMuteSettings(chat:Chat): Flow<Result<Long>> {
         return flow<Long> {
-            chatDao.changeMute(chatId, isMuted)
+            chatDao.changeMute(chat)
         }.map {
             Result.success(it)
         }.catch {
@@ -50,9 +53,9 @@ class ChatRepository(
         }
     }
 
-    suspend fun startChat(name: String): Flow<Result<Long>> {
+    suspend fun startChat(chat: Chat): Flow<Result<Long>> {
         return flow<Long> {
-            chatDao.createNewChat(name)
+            chatDao.createNewChat(chat)
         }.map {
             Result.success(it)
         }.catch {
@@ -60,9 +63,9 @@ class ChatRepository(
         }
     }
 
-    suspend fun sendMessage(chatId: Int, message: String): Flow<Result<Long>> {
+    suspend fun sendMessage(message: Message): Flow<Result<Long>> {
         return flow<Long> {
-            chatDao.insertMessage(chatId, message)
+            chatDao.insertMessage(message)
         }.map {
             Result.success(it)
         }.catch {

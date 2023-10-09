@@ -6,22 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.bedir.chatdemo.databinding.FragmentChatListBinding
+import com.bedir.chatdemo.databinding.FragmentNewChatBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ChatListFragment : DemoFragment<FragmentChatListBinding>() {
+class NewChatFragment : DemoFragment<FragmentNewChatBinding>() {
 
     private val viewModel: ChatListViewModel by viewModels()
 
     @Inject
     lateinit var chatAdapter: ChatListAdapter
-    override fun binding(inflater: LayoutInflater, container: ViewGroup?): FragmentChatListBinding {
-        return FragmentChatListBinding.inflate(inflater, container, false)
+    override fun binding(inflater: LayoutInflater, container: ViewGroup?): FragmentNewChatBinding {
+        return FragmentNewChatBinding.inflate(inflater, container, false)
     }
 
     override fun render(state: State) {
@@ -35,12 +33,6 @@ class ChatListFragment : DemoFragment<FragmentChatListBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         subscribeFlow(viewModel.getStateHolder())
-            viewModel.getChatList()
-
-
-        viewBinding.fabNew.setOnClickListener {
-            findNavController().navigate(R.id.navigation_new_chat)
-        }
     }
 
     override fun onEvent(event: Event) {
