@@ -14,18 +14,27 @@ class ChatRepository(
     private val chatDao: DefaultChatDao
 ) {
     suspend fun getAllChats(): Flow<Result<List<ChatWithMessages>>> {
-        return flow<List<ChatWithMessages>> {
-            emit(chatDao.getAllChats())
-        }.map {
+
+        return chatDao.getAllChats().map {
             Result.success(it)
         }.catch {
-            emit(Result.failure(it))
+            Result.failure<ChatWithMessages>(it)
         }.flowOn(Dispatchers.IO)
+
     }
 
     suspend fun getChatMessages(chatId: Int): Flow<Result<List<Message>>> {
-        return flow<List<Message>> {
-            chatDao.getChatMessages(chatId)
+        return chatDao.getChatMessages(chatId)
+            .map {
+                Result.success(it)
+            }.catch {
+                emit(Result.failure(it))
+            }
+    }
+
+    suspend fun changeMuteSettings(chat: Chat): Flow<Result<Int>> {
+        return flow<Int> {
+            emit(chatDao.changeMute(chat))
         }.map {
             Result.success(it)
         }.catch {
@@ -33,18 +42,8 @@ class ChatRepository(
         }
     }
 
-    suspend fun changeMuteSettings(chat:Chat): Flow<Result<Long>> {
-        return flow<Long> {
-            chatDao.changeMute(chat)
-        }.map {
-            Result.success(it)
-        }.catch {
-            emit(Result.failure(it))
-        }
-    }
-
-    suspend fun deleteChat(chatId: Int): Flow<Result<Long>> {
-        return flow<Long> {
+    suspend fun deleteChat(chatId: Int): Flow<Result<Int>> {
+        return flow<Int> {
             chatDao.deleteChat(chatId)
         }.map {
             Result.success(it)

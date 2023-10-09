@@ -25,7 +25,28 @@ class ChatListFragment : DemoFragment<FragmentChatListBinding>() {
     }
 
     override fun render(state: State) {
+        when (state as ChatListState) {
+            ChatListState.Empty -> {
+                with(viewBinding) {
+                    rvChats.visibility = View.GONE
+                    llEmpty.visibility = View.VISIBLE
+                    fabNew.visibility = View.GONE
+                }
+            }
 
+            is ChatListState.IdleState -> {
+                //do nothing
+            }
+
+            is ChatListState.Success -> {
+                with(viewBinding) {
+                    rvChats.visibility = View.VISIBLE
+                    llEmpty.visibility = View.GONE
+                    fabNew.visibility = View.VISIBLE
+                    chatAdapter.submitList(state.chatList)
+                }
+            }
+        }
     }
 
     override fun handleEvent(event: Event) {
@@ -34,13 +55,16 @@ class ChatListFragment : DemoFragment<FragmentChatListBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        subscribeFlow(viewModel.getStateHolder())
-            viewModel.getChatList()
-
-
-        viewBinding.fabNew.setOnClickListener {
-            findNavController().navigate(R.id.navigation_new_chat)
+        with(viewBinding) {
+            appbar.setTitle(getString(R.string.app_name))
+            rvChats.adapter = chatAdapter
+            fabNew.setOnClickListener {
+                findNavController().navigate(R.id.navigation_new_chat)
+            }
+            fabNew.bringToFront()
         }
+        subscribeFlow(viewModel.getStateHolder())
+        viewModel.getChatList()
     }
 
     override fun onEvent(event: Event) {

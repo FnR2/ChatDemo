@@ -45,4 +45,5 @@ dependencies {
     api ("androidx.room:room-runtime:$roomVersion")
     api( "androidx.room:room-ktx:$roomVersion")
     kapt ("androidx.room:room-compiler:$roomVersion")
+    kapt ("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.5.0")
 }

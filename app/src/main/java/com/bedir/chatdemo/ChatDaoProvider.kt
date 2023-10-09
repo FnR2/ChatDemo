@@ -5,6 +5,7 @@ import com.bedir.entity.Chat
 import com.bedir.entity.ChatWithMessages
 import com.bedir.entity.Message
 import com.bedir.room.ChatDao
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class ChatDaoProvider @Inject constructor(
@@ -22,11 +23,11 @@ class ChatDaoProvider @Inject constructor(
         return chatDao.deleteChat(chatId)
     }
 
-    override suspend fun getAllChats(): List<ChatWithMessages> {
+    override suspend fun getAllChats(): Flow<List<ChatWithMessages>> {
         return chatDao.getAllChats()
     }
 
-    override suspend fun getChatMessages(chatId: Int): List<Message> {
+    override suspend fun getChatMessages(chatId: Int): Flow<List<Message>> {
         return chatDao.getChatMessages(chatId)
     }
 

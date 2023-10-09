@@ -1,15 +1,16 @@
 package com.bedir.chatdemo
 
 import com.bedir.entity.Chat
+import com.bedir.entity.ChatWithMessages
 
 class ItemMapper {
-    fun mapChatList(list: List<Chat>): List<ChatItemModel> {
+    fun mapChatList(list: List<ChatWithMessages>): List<ChatItemModel> {
         return list.map {
             ChatItemModel(
-                id = it.chatId.toString(),
-                name = it.name,
+                id = it.chat.chatId.toString(),
+                name = it.chat.name,
                 lastMessage = "",
-                isMuted = it.isMuted
+                isMuted = it.chat.isMuted
             )
         }
     }

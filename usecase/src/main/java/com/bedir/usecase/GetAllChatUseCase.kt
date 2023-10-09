@@ -14,7 +14,7 @@ class GetAllChatUseCase(
     suspend fun execute(): Flow<AllChatsResult> {
         return repository.getAllChats().map { result ->
             result.fold(onSuccess = {
-                if (it.isEmpty()) {
+                if (it.isNotEmpty()) {
                     AllChatsResult.Success(it)
                 } else {
                     AllChatsResult.Empty

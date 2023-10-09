@@ -27,18 +27,6 @@ open class DemoViewModel<S:State>(
 
     }
 
-    fun sendErrorEvent(error: Throwable) {
-        sendEvent(ErrorEvent(error))
-    }
-
-    fun sendLoadingEvent() {
-        sendEvent(LoadingEvent)
-    }
-
-    fun sendCompletedEvent() {
-        sendEvent(CompletedEvent)
-    }
-
     fun getEvents() = eventsFlow
     fun getStateHolder() = stateHolder
 }

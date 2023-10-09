@@ -2,4 +2,6 @@
     <string name="app_name">ChatDemo</string>
     <string name="title_chat_list">Chat</string>
     <string name="title_new_chat">Create Chat</string>
+    <string name="empty_title">Create your first chat now</string>
+    <string name="create_button">Create New Chat</string>
 </resources>

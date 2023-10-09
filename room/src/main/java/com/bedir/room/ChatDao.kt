@@ -4,6 +4,7 @@ import androidx.room.*
 import com.bedir.entity.Chat
 import com.bedir.entity.ChatWithMessages
 import com.bedir.entity.Message
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 abstract class ChatDao {
@@ -23,7 +24,7 @@ abstract class ChatDao {
         "SELECT  * FROM Chat"
     )
     abstract fun getAllChats(
-    ): List<ChatWithMessages>
+    ): Flow<List<ChatWithMessages>>
 
     @Transaction
     @Query(
@@ -31,7 +32,7 @@ abstract class ChatDao {
     )
     abstract fun getChatMessages(
         id: Int
-    ): List<Message>
+    ): Flow<List<Message>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insertMessage(message: Message): Long

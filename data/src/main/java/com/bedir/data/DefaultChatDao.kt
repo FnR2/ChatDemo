@@ -9,7 +9,7 @@ interface DefaultChatDao {
     suspend fun createNewChat(chat: Chat): Long
     suspend fun changeMute(chat: Chat): Int
     suspend fun deleteChat(chatId:Int): Int
-    suspend fun getAllChats(): List<ChatWithMessages>
-    suspend fun getChatMessages(chatId:Int): List<Message>
+    suspend fun getAllChats(): Flow<List<ChatWithMessages>>
+    suspend fun getChatMessages(chatId:Int): Flow<List<Message>>
     suspend fun insertMessage(message: Message): Long
 }
