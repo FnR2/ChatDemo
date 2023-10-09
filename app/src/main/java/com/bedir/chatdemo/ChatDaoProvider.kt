@@ -34,4 +34,8 @@ class ChatDaoProvider @Inject constructor(
     override suspend fun insertMessage(message: Message): Long {
         return chatDao.insertMessage(message)
     }
+
+    override suspend fun checkItemExist(name: String): Boolean {
+        return chatDao.checkItemExist(name)
+    }
 }

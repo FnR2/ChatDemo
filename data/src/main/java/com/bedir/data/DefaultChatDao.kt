@@ -12,4 +12,5 @@ interface DefaultChatDao {
     suspend fun getAllChats(): Flow<List<ChatWithMessages>>
     suspend fun getChatMessages(chatId:Int): Flow<List<Message>>
     suspend fun insertMessage(message: Message): Long
+    suspend fun checkItemExist(name:String):Boolean
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -23,6 +24,9 @@ class ChatListFragment : DemoFragment<FragmentChatListBinding>() {
     override fun binding(inflater: LayoutInflater, container: ViewGroup?): FragmentChatListBinding {
         return FragmentChatListBinding.inflate(inflater, container, false)
     }
+
+    private val clickListener =
+        OnClickListener { findNavController().navigate(R.id.navigation_new_chat) }
 
     override fun render(state: State) {
         when (state as ChatListState) {
@@ -58,9 +62,8 @@ class ChatListFragment : DemoFragment<FragmentChatListBinding>() {
         with(viewBinding) {
             appbar.setTitle(getString(R.string.app_name))
             rvChats.adapter = chatAdapter
-            fabNew.setOnClickListener {
-                findNavController().navigate(R.id.navigation_new_chat)
-            }
+            fabNew.setOnClickListener(clickListener)
+            btnNewChat.setOnClickListener(clickListener)
             fabNew.bringToFront()
         }
         subscribeFlow(viewModel.getStateHolder())

@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 abstract class ChatDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     abstract fun createChat(item: Chat): Long
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
@@ -36,6 +36,9 @@ abstract class ChatDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insertMessage(message: Message): Long
+
+    @Query("SELECT EXISTS (SELECT * FROM chat WHERE name = :name)")
+    abstract fun checkItemExist(name: String): Boolean
 
 
 }

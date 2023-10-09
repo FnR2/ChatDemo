@@ -1,27 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.bedir.chatdemo.ChatItemModel" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/tv_address"
+            android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:padding="4dp"
             android:text="@{viewModel.name}"
-            android:textColor="@color/white"
+            android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Friend" />
+
+        <TextView
+            android:id="@+id/tv_last_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@{viewModel.lastMessage}"
+            android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
+            android:textColor="@color/grey"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_name"
+            tools:text="Hello how are you" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:textAppearance="@style/TextAppearance.Compat.Notification.Info"
+            android:textColor="@color/grey"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_name"
+            tools:text="12.10" />
+
+        <ImageView
+            android:layout_marginTop="4dp"
+            android:id="@+id/iv_mute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/baseline_notifications_off_24"
+            android:visibility="@{viewModel.muted?View.VISIBLE:View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_date" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

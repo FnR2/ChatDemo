@@ -4,6 +4,7 @@ import android.content.Context
 import com.bedir.data.ChatRepository
 import com.bedir.usecase.GetAllChatUseCase
 import com.bedir.usecase.SendMessageUseCase
+import com.bedir.usecase.StartChatUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,6 +29,12 @@ object ChatListViewModelModule{
     @Provides
     fun provideGetAllChatUseCase(repository: ChatRepository): GetAllChatUseCase {
         return GetAllChatUseCase(repository)
+    }
+
+    @ViewModelScoped
+    @Provides
+    fun provideNewChatUseCase(repository: ChatRepository): StartChatUseCase {
+        return StartChatUseCase(repository)
     }
 
 

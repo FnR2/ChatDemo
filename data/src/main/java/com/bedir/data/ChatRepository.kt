@@ -54,12 +54,12 @@ class ChatRepository(
 
     suspend fun startChat(chat: Chat): Flow<Result<Long>> {
         return flow<Long> {
-            chatDao.createNewChat(chat)
+            emit(chatDao.createNewChat(chat))
         }.map {
             Result.success(it)
         }.catch {
             emit(Result.failure(it))
-        }
+        }.flowOn(Dispatchers.IO)
     }
 
     suspend fun sendMessage(message: Message): Flow<Result<Long>> {
@@ -70,5 +70,15 @@ class ChatRepository(
         }.catch {
             emit(Result.failure(it))
         }
+    }
+
+    suspend fun checkItemExist(name: String): Flow<Result<Boolean>> {
+        return flow<Boolean> {
+            emit(chatDao.checkItemExist(name))
+        }.map {
+            Result.success(it)
+        }.catch {
+            emit(Result.failure(it))
+        }.flowOn(Dispatchers.IO)
     }
 }

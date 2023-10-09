@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import com.bedir.chatdemo.databinding.ChatListItemBinding
 
 class ChatListAdapter(
     private val eventListener: EventListener
@@ -29,16 +30,16 @@ class ChatListAdapter(
                 oldItem: ChatItemModel,
                 newItem: ChatItemModel
             ): Boolean {
-                return oldItem== newItem
+                return oldItem == newItem
             }
 
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatListViewHolder {
-        val binding: ViewDataBinding = DataBindingUtil.inflate(
+        val binding: ChatListItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            viewType,
+            R.layout.chat_list_item,
             parent,
             false
         )

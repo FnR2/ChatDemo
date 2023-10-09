@@ -4,4 +4,6 @@
     <string name="title_new_chat">Create Chat</string>
     <string name="empty_title">Create your first chat now</string>
     <string name="create_button">Create New Chat</string>
+    <string name="new_chat_hint">Enter Chat Name</string>
+    <string name="exist_warning">This name already exist</string>
 </resources>
